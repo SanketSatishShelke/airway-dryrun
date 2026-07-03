@@ -1,8 +1,9 @@
 .env
-
-DATA_DIR=/mnt/data/airway-dryrun
-REF_DIR=/mnt/data/airway-dryrun/reference
-PROJECT_DIR=/home/priyasanket/projects/airway-dryrun
-
-ANTHROPIC_API_KEY= (add later, when we build the LLM layer)
 .Rproj.user
+.env
+data/
+*.bam
+*.bai
+*.fastq*
+*.sam
+reference/
