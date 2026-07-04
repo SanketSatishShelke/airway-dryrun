@@ -75,3 +75,17 @@ protocols common at the time of the original study (2014), predating the
 widespread adoption of strand-specific kits.
 
 **Decision:** featureCounts run with `-s 0` (unstranded) for all 8 samples.
+
+## Quantification (featureCounts)
+
+All 8 samples quantified with featureCounts v2.1.1, using `-p --countReadPairs`
+(fragment-level counting; note this changed from `-p` alone in subread v2.0.2+)
+and `-s 0` (unstranded, per RSeQC inference above), against the same Ensembl
+release 84 GTF used for alignment.
+
+SRR1039508 (validated in detail): 77.5% assigned. Remaining unassigned reads
+distributed across expected categories — multi-mapping (~12.5%, expected given
+paralogous genes/repetitive elements), no-feature (~4%, intronic/intergenic
+background), and ambiguity (~4.6%, real biological gene overlap). All 8 samples
+show consistent Assigned % and category proportions (confirmed via MultiQC),
+no outlier samples.
