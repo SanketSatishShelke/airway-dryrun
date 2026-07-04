@@ -64,3 +64,14 @@ needed before Day 2 alignment.
 All 8 samples show consistent alignment rates (95.95%–97.75%), well within
 expected range for clean human RNA-seq against a correctly matched reference.
 No outlier samples flagged at this stage.
+
+## Strandedness Inference (RSeQC infer_experiment.py)
+
+All 8 samples show near-equal fractions (~40-45% each) between the two
+strand-specific read categories, with no sample showing a dominant pattern
+(which would indicate ~90%+ in one category). This confirms the library is
+**unstranded**, consistent with standard (non-strand-specific) library prep
+protocols common at the time of the original study (2014), predating the
+widespread adoption of strand-specific kits.
+
+**Decision:** featureCounts run with `-s 0` (unstranded) for all 8 samples.
