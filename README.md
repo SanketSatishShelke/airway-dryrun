@@ -10,7 +10,7 @@ Equivalent underlying sequencing data to SRA accessions SRR1039508/09/12/13/16/1
 Switched from SRA-tools (prefetch/fasterq-dump) due to local disk I/O bottleneck
 during SRA-to-FASTQ conversion.
 
-## Day 1 QC interpretation
+## Quality Control — Interpretation
 
 **Per-base sequence quality:** All 16 samples show Phred ≥30 across nearly the
 full read length. No quality-based trimming required.
