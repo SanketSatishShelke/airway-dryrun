@@ -12,6 +12,11 @@ during SRA-to-FASTQ conversion.
 
 ## Quality Control — Interpretation
 
+**Read length:** 63bp (paired-end), shorter than typical for the era. This is
+expected — per the original study's processing notes, the first 12bp of each
+75bp read were trimmed by the authors prior to SRA deposit due to 5' sequence
+bias, hence the shorter deposited read length.
+
 **Per-base sequence quality:** All 16 samples show Phred ≥30 across nearly the
 full read length. No quality-based trimming required.
 
@@ -42,3 +47,20 @@ contexts, not standard bulk RNA-seq differential expression workflows).
 
 **Conclusion:** raw data quality is clean across all metrics. No trimming
 needed before Day 2 alignment.
+
+## Alignment Results (HISAT2, GRCh38 + Ensembl release 84 annotation)
+
+| Sample | Overall Alignment Rate |
+|---|---|
+| SRR1039508 | 97.06% |
+| SRR1039509 | 95.95% |
+| SRR1039512 | 97.75% |
+| SRR1039513 | 97.30% |
+| SRR1039516 | 97.30% |
+| SRR1039517 | 97.51% |
+| SRR1039520 | 97.36% |
+| SRR1039521 | 97.16% |
+
+All 8 samples show consistent alignment rates (95.95%–97.75%), well within
+expected range for clean human RNA-seq against a correctly matched reference.
+No outlier samples flagged at this stage.
