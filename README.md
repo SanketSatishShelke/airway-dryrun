@@ -89,3 +89,17 @@ paralogous genes/repetitive elements), no-feature (~4%, intronic/intergenic
 background), and ambiguity (~4.6%, real biological gene overlap). All 8 samples
 show consistent Assigned % and category proportions (confirmed via MultiQC),
 no outlier samples.
+
+## R Environment
+
+R package management handled via `renv` (renv.lock committed), separate from
+the conda environment used for command-line tools (HISAT2, samtools,
+featureCounts, etc. — see environment.yml). This split reflects standard
+practice: conda/bioconda for the pipeline toolchain, renv for the R/statistics
+layer, since RStudio's ecosystem is built natively around renv.
+
+**System dependencies required** (Ubuntu) for R graphics packages (ggplot2 and
+its dependencies systemfonts/textshaping): `libfontconfig1-dev`,
+`libharfbuzz-dev`, `libfribidi-dev`, `libfreetype6-dev`, `libpng-dev`,
+`libtiff5-dev`, `libjpeg-dev`. Install via apt before running `renv::restore()`
+on a fresh machine.
