@@ -1,0 +1,9 @@
+Module	Section	Sample Name	Source
+featureCounts	all_sections	SRR1039508	/home/priyasanket/projects/airway-dryrun/results/counts/SRR1039508_counts.txt.summary
+featureCounts	all_sections	SRR1039509	/home/priyasanket/projects/airway-dryrun/results/counts/SRR1039509_counts.txt.summary
+featureCounts	all_sections	SRR1039512	/home/priyasanket/projects/airway-dryrun/results/counts/SRR1039512_counts.txt.summary
+featureCounts	all_sections	SRR1039513	/home/priyasanket/projects/airway-dryrun/results/counts/SRR1039513_counts.txt.summary
+featureCounts	all_sections	SRR1039516	/home/priyasanket/projects/airway-dryrun/results/counts/SRR1039516_counts.txt.summary
+featureCounts	all_sections	SRR1039517	/home/priyasanket/projects/airway-dryrun/results/counts/SRR1039517_counts.txt.summary
+featureCounts	all_sections	SRR1039520	/home/priyasanket/projects/airway-dryrun/results/counts/SRR1039520_counts.txt.summary
+featureCounts	all_sections	SRR1039521	/home/priyasanket/projects/airway-dryrun/results/counts/SRR1039521_counts.txt.summary
