@@ -1,7 +1,7 @@
 # Load count matrix and sample metadata, align them for DESeq2
 
 counts_raw <- read.table(
-  "results/counts/all_samples_counts.txt",
+  file.path(Sys.getenv("PROJECT_DIR"), "results/counts/all_samples_counts.txt"),
   header = TRUE, sep = "\t", skip = 1, row.names = 1
 )
 
@@ -13,7 +13,7 @@ count_cols <- counts_raw[, 6:ncol(counts_raw)]
 # matching sample_metadata.csv's run_accession column exactly
 colnames(count_cols) <- sub("\\.sorted\\.bam$", "", colnames(count_cols))
 
-metadata <- read.csv("sample_metadata.csv", stringsAsFactors = TRUE)
+metadata <- read.csv(file.path(Sys.getenv("PROJECT_DIR"), "sample_metadata.csv"), stringsAsFactors = TRUE)
 rownames(metadata) <- metadata$run_accession
 
 # Explicit key-based reordering: match count matrix columns to metadata rows

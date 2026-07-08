@@ -103,3 +103,26 @@ its dependencies systemfonts/textshaping): `libfontconfig1-dev`,
 `libharfbuzz-dev`, `libfribidi-dev`, `libfreetype6-dev`, `libpng-dev`,
 `libtiff5-dev`, `libjpeg-dev`. Install via apt before running `renv::restore()`
 on a fresh machine.
+
+## Validation: CRISPLD2 upregulation under dexamethasone
+
+Himes et al. 2014 identified **CRISPLD2** as significantly upregulated under
+dexamethasone treatment in airway smooth muscle cells, confirmed by qPCR and
+Western blot. This serves as the primary validation target for this dry-run
+pipeline — reproducing this specific, published result from raw FASTQ files
+confirms the full pipeline (acquisition → alignment → quantification →
+differential expression) behaves correctly end to end.
+
+```{r crispld2-check}
+crispld2 <- res["ENSG00000103196", ]
+crispld2
+```
+
+**Result:** log2FoldChange = `r round(crispld2$log2FoldChange, 3)`
+(≈ `r round(2^crispld2$log2FoldChange, 1)`x higher expression in treated vs.
+untreated), padj = `r format(crispld2$padj, scientific = TRUE, digits = 3)`.
+
+This confirms the expected direction and magnitude of upregulation, with
+padj several orders of magnitude below any conventional significance
+threshold (0.05/0.1) — consistent with the original paper's qPCR/Western
+blot validation.

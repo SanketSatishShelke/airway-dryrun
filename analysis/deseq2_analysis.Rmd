@@ -1,0 +1,62 @@
+---
+title: "DESeq2 Differential Expression Analysis — Airway Dry Run (GSE52778)"
+author: "Sanket Shelke"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = TRUE, message = TRUE)
+readRenviron(file.path("..", ".env"))
+```
+
+## Load libraries
+
+```{r libraries}
+library(DESeq2)
+library(ggplot2)
+library(pheatmap)
+```
+
+## Load count matrix and metadata
+
+Reuses the objects produced by `scripts/import_counts.R` — count matrix
+already column-reordered and key-matched against `sample_metadata.csv`.
+
+```{r dependancies}
+project_root <- Sys.getenv("PROJECT_ROOT")
+source("../scripts/import_counts.R")
+stopifnot(all(colnames(count_cols) == metadata$run_accession))
+```
+
+## Build DESeqDataSet
+
+Design formula uses the metadata's existing column names (`cell_line`,
+`condition`) rather than renaming metadata to match a formula shorthand.
+
+```{r build-dds}
+dds <- DESeqDataSetFromMatrix(
+  countData = count_cols,
+  colData   = metadata,
+  design    = ~ cell_line + condition
+)
+
+dds
+```
+```{r}
+dds$condition <- relevel(factor(dds$condition), ref = "untreated")
+levels(dds$condition)
+```
+```{r}
+dds <- DESeq(dds)
+res <- results(dds)
+summary(res)
+```
+```{r}
+res["ENSG00000103196", ]
+```
+
