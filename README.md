@@ -126,3 +126,47 @@ This confirms the expected direction and magnitude of upregulation, with
 padj several orders of magnitude below any conventional significance
 threshold (0.05/0.1) — consistent with the original paper's qPCR/Western
 blot validation.
+
+## Agentic Interpretation Layer (v1)
+
+A single-source LLM-based interpretation layer sits on top of the DESeq2
+differential expression results, in `agentic_layer/`.
+
+**Pipeline:** top 20 DE genes (by adjusted p-value) → MyGene.info batch
+annotation lookup (gene symbol, name, functional summary) → per-gene LLM
+summary generation, connecting each gene's statistical result to its known
+function → one closing synthesis paragraph identifying possible shared
+themes across genes, explicitly framed as a hypothesis for further
+investigation (e.g. via formal GO/pathway enrichment), not a confirmed
+finding.
+
+**LLM backend:** meta/llama-3.3-70b-instruct, served via NVIDIA NIM's
+free-tier, OpenAI-compatible API endpoint. The client (`llm_client.py`) is
+written provider-agnostic — swapping providers requires changing only the
+base URL, model name, and API key source.
+
+**Concurrency:** gene summaries are generated via concurrent API calls
+(`ThreadPoolExecutor`, bounded worker pool, retry-with-backoff on failure)
+rather than sequentially, since each call is independent and I/O-bound.
+
+Python dependencies for this layer are pinned in `agentic_layer/requirements.txt`
+(reusing the existing conda environment for execution — see "R Environment"
+above for the equivalent conda/renv split rationale).
+
+**Scope and honest limitations (v1):**
+- Single annotation source (MyGene.info only) — no cross-referencing
+  against NCBI or UniProt yet
+- No autonomous tool selection — the script always calls the same fixed
+  sequence of tools, rather than an LLM agent deciding which tool to call
+- LLM-generated interpretations are not validated against formal enrichment
+  analysis and should be treated as hypothesis-generation aids, not
+  confirmed biological conclusions
+
+**Planned extensions:** multi-source annotation cross-referencing (NCBI,
+UniProt), a clusterProfiler-based enrichment agent, and a separate
+pipeline-supervisor agent for Nextflow/SLURM job management (retry logic,
+OOM detection) — see "On the horizon" below.
+
+Python dependencies for this layer are pinned in `agentic_layer/requirements.txt`
+(separate from the conda CLI environment and renv/R environment — see
+"R Environment" above for the equivalent split rationale).
